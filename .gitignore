@@ -1,3 +1,6 @@
+### Secrets ###
+application-secrets.properties
+
 # Compiled class file
 *.class
 
