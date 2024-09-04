@@ -1,7 +1,3 @@
--- Create the library database
-CREATE DATABASE library;
-GO
-
 -- Switch to the library database
 USE library;
 GO
@@ -39,12 +35,12 @@ CREATE TABLE book_loan (
     id UNIQUEIDENTIFIER PRIMARY KEY,
     member_id UNIQUEIDENTIFIER NOT NULL,
     book_id INT NOT NULL,
-    checkout_date DATE NOT NULL,
-    due_date DATE NOT NULL,
-    return_date DATE,
-    fine_amount DECIMAL(10, 2),
+    checkout_date DATETIME2(7) NOT NULL,
+    due_date DATETIME2(7) NOT NULL,
+    return_date DATETIME2(7),
+    fine_amount FLOAT(53),
     fine_status NVARCHAR(50),
-    fine_status_date DATE,
+    fine_status_date DATETIME2(7),
     CONSTRAINT FK_book_loan_member FOREIGN KEY (member_id) REFERENCES member(id),
     CONSTRAINT FK_book_loan_book FOREIGN KEY (book_id) REFERENCES book(id)
 );
@@ -55,9 +51,9 @@ CREATE TABLE book_reservation (
     id UNIQUEIDENTIFIER PRIMARY KEY,
     member_id UNIQUEIDENTIFIER NOT NULL,
     book_id INT NOT NULL,
-    reservation_date DATE NOT NULL,
+    reservation_date DATETIME2(7) NOT NULL,
     status NVARCHAR(50) NOT NULL,
-    pickup_date DATE,
+    pickup_date DATETIME2(7),
     CONSTRAINT FK_book_reservation_member FOREIGN KEY (member_id) REFERENCES member(id),
     CONSTRAINT FK_book_reservation_book FOREIGN KEY (book_id) REFERENCES book(id)
 );
@@ -69,7 +65,7 @@ CREATE TABLE book_review (
     book_id INT NOT NULL,
     member_id UNIQUEIDENTIFIER NOT NULL,
     rating INT CHECK (rating >= 1 AND rating <= 5),
-    review_date DATE NOT NULL,
+    review_date DATETIME2(7) NOT NULL,
     CONSTRAINT FK_book_review_book FOREIGN KEY (book_id) REFERENCES book(id),
     CONSTRAINT FK_book_review_member FOREIGN KEY (member_id) REFERENCES member(id)
 );
