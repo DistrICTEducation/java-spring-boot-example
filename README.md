@@ -25,6 +25,9 @@ CREATE LOGIN library_user WITH PASSWORD = 'db_password';
 
 USE library;
 CREATE USER library_user FOR LOGIN library_user;
+
+EXEC sp_addrolemember 'db_datareader', 'library_user';
+EXEC sp_addrolemember 'db_datawriter', 'library_user';
 ```
 
 
