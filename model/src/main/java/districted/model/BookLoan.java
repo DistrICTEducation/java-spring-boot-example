@@ -1,5 +1,7 @@
 package districted.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -21,7 +23,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "book_loan", schema = "dbo")
 public class BookLoan {
-
     @Id
     @GeneratedValue
     private UUID id;
@@ -35,12 +36,18 @@ public class BookLoan {
     private Book book;
 
     @Column(name = "checkout_date", nullable = false)
+    @JsonSerialize()
+    @JsonDeserialize()
     private Date checkoutDate;
 
     @Column(name = "due_date", nullable = false)
+    @JsonSerialize()
+    @JsonDeserialize()
     private Date dueDate;
 
     @Column(name = "return_date")
+    @JsonSerialize()
+    @JsonDeserialize()
     private Date returnDate;
 
     @Column(name = "fine_amount")
@@ -51,6 +58,8 @@ public class BookLoan {
     private String fineStatus;
 
     @Column(name = "fine_status_date")
+    @JsonSerialize()
+    @JsonDeserialize()
     private Date fineStatusDate;
 
     @AssertTrue(message = "The checkout date must be before or equal to the due date.")

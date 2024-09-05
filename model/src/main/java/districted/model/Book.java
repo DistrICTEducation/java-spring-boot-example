@@ -24,7 +24,6 @@ import lombok.With;
 @Entity
 @Table(name = "book", schema = "dbo")
 public class Book {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

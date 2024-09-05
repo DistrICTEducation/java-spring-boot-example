@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.With;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 import java.util.UUID;
@@ -39,6 +40,7 @@ public class BookReview {
     @Max(value = 5, message = "The rating must be between 1 and 5.")
     private Integer rating;
 
+    @CreationTimestamp
     @Column(name = "review_date", nullable = false)
     private Date reviewDate;
 }

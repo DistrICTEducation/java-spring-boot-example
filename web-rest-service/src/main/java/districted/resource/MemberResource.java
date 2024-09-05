@@ -2,7 +2,7 @@ package districted.resource;
 
 import districted.converter.MemberDtoInConverter;
 import districted.dto.MemberDtoIn;
-import districted.model.Book;
+import districted.model.BookReview;
 import districted.model.Member;
 import districted.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -28,21 +29,26 @@ public class MemberResource {
     private final MemberService memberService;
     private final MemberDtoInConverter memberDtoInConverter;
 
+    @GetMapping
+    public ResponseEntity<List<Member>> getBookLoans() {
+        return ResponseEntity.ok(this.memberService.getAll());
+    }
+
     @GetMapping(value = "/{id}")
-    public ResponseEntity getMemberById(@PathVariable UUID id) {
+    public ResponseEntity<Member> getMemberById(@PathVariable UUID id) {
         Member body = this.memberService.getById(id);
         return ResponseEntity.ok(body);
     }
 
     @PostMapping()
-    public ResponseEntity createMember(@RequestBody @Validated MemberDtoIn memberDtoIn) {
+    public ResponseEntity<Member> createMember(@RequestBody @Validated MemberDtoIn memberDtoIn) {
         Member member = memberDtoInConverter.convert(memberDtoIn);
         Member body = this.memberService.create(member);
         return ResponseEntity.status(HttpStatus.CREATED).body(body);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity updateMember(@PathVariable UUID id, @RequestBody @Validated MemberDtoIn memberDtoIn) {
+    public ResponseEntity<Member> updateMember(@PathVariable UUID id, @RequestBody @Validated MemberDtoIn memberDtoIn) {
         Member member = memberDtoInConverter.convert(id, memberDtoIn);
         Member body = this.memberService.update(member);
         body.setId(id);
@@ -50,9 +56,9 @@ public class MemberResource {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity deleteMember(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteMember(@PathVariable UUID id) {
         Member member = this.memberService.getById(id);
         this.memberService.delete(member);
-        return  ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build();
     }
 }

@@ -14,8 +14,6 @@ import lombok.With;
 @With
 @EqualsAndHashCode
 public class BookDtoIn {
-    private Integer id;
-
     private String isbn;
 
     private String isbn13;

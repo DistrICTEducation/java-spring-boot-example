@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.With;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -15,16 +16,20 @@ import java.util.UUID;
 @AllArgsConstructor
 @With
 @EqualsAndHashCode
-public class MemberDtoIn {
-    private String firstName;
+public class BookLoanDtoIn {
+    private UUID memberId;
 
-    private String lastName;
+    private Integer bookId;
 
-    private String email;
+    private Date checkoutDate;
 
-    private String phoneNumber;
+    private Date dueDate;
 
-    private String password;
+    private Date returnDate;
 
-    private String username;
+    private Double fineAmount;
+
+    private String fineStatus;
+
+    private Date fineStatusDate;
 }

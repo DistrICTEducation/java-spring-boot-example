@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/books")
 @RequiredArgsConstructor
@@ -25,21 +27,26 @@ public class BookResource {
     private final BookService bookService;
     private final BookDtoInConverter bookDtoInConverter;
 
+    @GetMapping
+    public ResponseEntity<List<Book>> getBooks() {
+        return ResponseEntity.ok(this.bookService.getAll());
+    }
+
     @GetMapping(value = "/{id}")
-    public ResponseEntity getBookById(@PathVariable Integer id) {
+    public ResponseEntity<Book> getBookById(@PathVariable Integer id) {
         Book body = this.bookService.getById(id);
         return ResponseEntity.ok(body);
     }
 
     @PostMapping()
-    public ResponseEntity createBook(@RequestBody @Validated BookDtoIn bookDtoIn) {
+    public ResponseEntity<Book> createBook(@RequestBody @Validated BookDtoIn bookDtoIn) {
         Book book = bookDtoInConverter.convert(bookDtoIn);
         Book body = this.bookService.create(book);
         return ResponseEntity.status(HttpStatus.CREATED).body(body);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity updateBook(@PathVariable Integer id, @RequestBody @Validated BookDtoIn bookDtoIn) {
+    public ResponseEntity<Book> updateBook(@PathVariable Integer id, @RequestBody @Validated BookDtoIn bookDtoIn) {
         Book book = bookDtoInConverter.convert(id, bookDtoIn);
         Book body = this.bookService.update(book);
         body.setId(id);
@@ -47,7 +54,7 @@ public class BookResource {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity deleteBook(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteBook(@PathVariable Integer id) {
         Book book = this.bookService.getById(id);
         this.bookService.delete(book);
         return  ResponseEntity.noContent().build();
