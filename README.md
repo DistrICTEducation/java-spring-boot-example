@@ -13,7 +13,8 @@ You can start and stop the server using the program "Sql Server Configuration Ma
 
 ### Create database `library`
 
-The database can be created with the script in [`data/database.sql`](data/database.sql).
+The database can be created with the script in [`data/database.create.sql`](data/database.create.sql). To add the tables of the `library` database, run the script [`data/tables.create.sql`](data/tables.create.sql)
+
 
 ### Create a user for the database
 
