@@ -1,4 +1,4 @@
-# Library database
+# Library - database
 
 ## Database model
 
@@ -13,7 +13,7 @@ Members of the library can rent out books for a set time (in days). If the book 
 
 Below, an overview of the datamodel is given in the entity relationship diagram (ERD).
 
-![library erd 0002](img/library.erd.png)
+![library erd](img/library.erd.png)
 
 library.member:
 - id (primary key, uuid)
