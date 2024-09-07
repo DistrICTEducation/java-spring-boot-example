@@ -30,7 +30,7 @@ public class MemberResource {
     private final MemberDtoInConverter memberDtoInConverter;
 
     @GetMapping
-    public ResponseEntity<List<Member>> getBookLoans() {
+    public ResponseEntity<List<Member>> getMembers() {
         return ResponseEntity.ok(this.memberService.getAll());
     }
 

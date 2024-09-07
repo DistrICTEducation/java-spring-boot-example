@@ -29,7 +29,7 @@ public class BookReservationResource {
     private final BookReservationDtoInConverter bookReservationDtoInConverter;
 
     @GetMapping
-    public ResponseEntity<List<BookReservation>> getBookLoans() {
+    public ResponseEntity<List<BookReservation>> getBookReservations() {
         return ResponseEntity.ok(this.bookReservationService.getAll());
     }
 
@@ -39,14 +39,14 @@ public class BookReservationResource {
         return ResponseEntity.ok(body);
     }
 
-    @PostMapping("/{id}/book-reservation")
+    @PostMapping
     public ResponseEntity<BookReservation> createBookReservation(@RequestBody @Validated BookReservationDtoIn bookReservationDtoIn) {
         BookReservation bookReservation = bookReservationDtoInConverter.convert(bookReservationDtoIn);
         BookReservation body = bookReservationService.create(bookReservation);
         return ResponseEntity.status(HttpStatus.CREATED).body(body);
     }
 
-    @PostMapping("/{id}/book-reservation/{reservationId}")
+    @PostMapping("/{reservationId}")
     public ResponseEntity<BookReservation> updateBookReservation(@PathVariable UUID reservationId, @RequestBody @Validated BookReservationDtoIn bookReservationDtoIn) {
         BookReservation bookReservation = bookReservationDtoInConverter.convert(reservationId, bookReservationDtoIn);
         BookReservation body = bookReservationService.update(bookReservation);

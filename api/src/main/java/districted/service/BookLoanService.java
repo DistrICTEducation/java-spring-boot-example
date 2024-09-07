@@ -1,7 +1,6 @@
 package districted.service;
 
 import com.google.common.base.Preconditions;
-import districted.model.Book;
 import districted.model.BookLoan;
 import districted.repository.BookLoanRepository;
 import jakarta.transaction.Transactional;

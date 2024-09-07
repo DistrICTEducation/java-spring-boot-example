@@ -1,11 +1,8 @@
 package districted.service;
 
 import com.google.common.base.Preconditions;
-import districted.model.BookLoan;
 import districted.model.BookReservation;
-import districted.model.BookReview;
 import districted.repository.BookReservationRepository;
-import districted.repository.BookReviewRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

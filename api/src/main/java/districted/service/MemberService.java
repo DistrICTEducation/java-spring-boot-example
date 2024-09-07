@@ -1,8 +1,6 @@
 package districted.service;
 
 import com.google.common.base.Preconditions;
-import districted.model.Book;
-import districted.model.BookReview;
 import districted.model.Member;
 import districted.repository.MemberRepository;
 import jakarta.transaction.Transactional;

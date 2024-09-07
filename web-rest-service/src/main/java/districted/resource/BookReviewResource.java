@@ -2,7 +2,6 @@ package districted.resource;
 
 import districted.converter.BookReviewDtoInConverter;
 import districted.dto.BookReviewDtoIn;
-import districted.model.BookReservation;
 import districted.model.BookReview;
 import districted.service.BookReviewService;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +28,7 @@ public class BookReviewResource {
     private final BookReviewDtoInConverter bookReviewDtoInConverter;
 
     @GetMapping
-    public ResponseEntity<List<BookReview>> getBookLoans() {
+    public ResponseEntity<List<BookReview>> getBookReviews() {
         return ResponseEntity.ok(this.bookReviewService.getAll());
     }
 
@@ -39,14 +38,14 @@ public class BookReviewResource {
         return ResponseEntity.ok(body);
     }
 
-    @PostMapping("/book-reviews")
+    @PostMapping
     public ResponseEntity<BookReview> createBookReview(@RequestBody @Validated BookReviewDtoIn bookReviewDtoIn) {
         BookReview bookReview = bookReviewDtoInConverter.convert(bookReviewDtoIn);
         BookReview body = bookReviewService.create(bookReview);
         return ResponseEntity.status(HttpStatus.CREATED).body(body);
     }
 
-    @PostMapping("/book-reviews/{bookReviewId}")
+    @PostMapping("/{bookReviewId}")
     public ResponseEntity<BookReview> updateBookReview(@PathVariable UUID bookReviewId, @RequestBody @Validated BookReviewDtoIn bookReviewDtoIn) {
         BookReview bookReview = bookReviewDtoInConverter.convert(bookReviewId, bookReviewDtoIn);
         BookReview body = bookReviewService.update(bookReview);

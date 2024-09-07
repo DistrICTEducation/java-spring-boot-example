@@ -34,20 +34,20 @@ public class BookLoanResource {
         return ResponseEntity.ok(this.bookLoanService.getAll());
     }
 
-    @GetMapping(value = "/book-loans/{bookLoanId}")
+    @GetMapping(value = "/{bookLoanId}")
     public ResponseEntity<BookLoan> getBookLoanById(@PathVariable UUID bookLoanId) {
         BookLoan body = bookLoanService.getById(bookLoanId);
         return ResponseEntity.ok(body);
     }
 
-    @PostMapping("/book-loans")
+    @PostMapping
     public ResponseEntity<BookLoan> createBookLoan(@RequestBody @Validated BookLoanDtoIn bookLoanDtoIn) {
         BookLoan bookLoan = bookLoanDtoInConverter.convert(bookLoanDtoIn);
         BookLoan body = bookLoanService.create(bookLoan);
         return ResponseEntity.status(HttpStatus.CREATED).body(body);
     }
 
-    @PutMapping("/book-loans/{bookLoanId}")
+    @PutMapping("/{bookLoanId}")
     public ResponseEntity<BookLoan> updateBookLoan(@PathVariable UUID bookLoanId, @RequestBody @Validated BookLoanDtoIn bookLoanDtoIn) {
         BookLoan bookLoan = bookLoanDtoInConverter.convert(bookLoanId, bookLoanDtoIn);
         BookLoan body = bookLoanService.update(bookLoan);
